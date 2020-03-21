@@ -1,26 +1,232 @@
 
 
+// ***** Interfaces Extending Classes *****
+class Control {
+    private state: any; // -> public state: any;
+}
 
+interface SelectableControl extends Control {
+    select(): void;
+}
+
+class Button extends Control implements SelectableControl {
+    select() {}
+}
+
+class TextBox extends Control {
+    select() {}
+}
+
+// Error: Property 'state' is missing in type 'Image'.
+// class Image1 implements SelectableControl {
+//     // TS2420: Class 'Image1' incorrectly implements interface 'SelectableControl'.
+//     // Types have separate declarations of a private property 'state'.
+//     private state: any;
+//     select() {}
+// }
+//
+// class Location1 {}
+
+
+
+// ***** Extending Interfaces2 *****
+// interface Counter {
+//     (start: number): string;
+//     interval: number;
+//     reset(): void;
+// }
+//
+// function getCounter(): Counter {
+//     let counter = function(start: number) {} as Counter;
+//     counter.interval = 123;
+//     counter.reset = function() {};
+//     return counter;
+// }
+//
+// let c = getCounter();
+// console.log(c.interval);
+// c(10);
+// console.log(c.interval);
+// c.reset();
+// console.log(c.interval);
+// c.interval = 5.0;
+// console.log(c.interval);
+
+
+
+
+// ***** Extending Interfaces1 *****
+// interface Shape {
+//     color: string;
+// }
+//
+// interface PenStroke {
+//     penWidth: number;
+// }
+//
+// interface Square extends Shape, PenStroke {
+//     sideLength: number;
+// }
+//
+// let square = {} as Square;
+// square.color = "blue";
+// square.sideLength = 10;
+// square.penWidth = 5.0;
+
+
+
+// ***** Extending Interfaces *****
+// interface Shape {
+//     color: string;
+// }
+//
+// interface Square extends Shape {
+//     sideLength: number;
+// }
+//
+// let square = {} as Square;
+// square.color = "blue";
+// square.sideLength = 10;
+
+
+
+
+
+// ***** Class Types5 *****
+// interface ClockConstructor {
+//     new (hour: number, minute: number);
+// }
+//
+// interface ClockInterface {
+//     tick();
+// }
+//
+// const Clock: ClockConstructor = class Clock implements ClockInterface {
+//     constructor(h: number, m: number) {}
+//     tick() {
+//         console.log("beep beep");
+//     }
+// };
+
+
+// ***** Class Types4 *****
+// interface ClockConstructor {
+//     new (hour: number, minute: number): ClockInterface;
+// }
+// interface ClockInterface {
+//     tick(): void;
+// }
+//
+// function createClock(
+//     ctor: ClockConstructor,
+//     hour: number,
+//     minute: number
+// ): ClockInterface {
+//     return new ctor(hour, minute);
+// }
+//
+// class DigitalClock implements ClockInterface {
+//     constructor(h: number, m: number) {}
+//     tick() {
+//         console.log("beep beep");
+//     }
+// }
+// class AnalogClock implements ClockInterface {
+//     constructor(h: number, m: number) {}
+//     tick() {
+//         console.log("tick tock");
+//     }
+// }
+//
+// let digital = createClock(DigitalClock, 12, 17);
+// let analog = createClock(AnalogClock, 7, 32);
+
+
+
+// ***** Class Types3 *****
+// interface ClockConstructor {
+//     new (hour: number, minute: number);
+// }
+//
+// class Clock implements ClockConstructor {
+//     currentTime: Date;
+//     constructor(h: number, m: number) {}
+// }
+
+
+
+// ***** Class Types2 *****
+// interface ClockInterface {
+//     currentTime: Date;
+//     setTime(d: Date): void;
+// }
+//
+// class Clock implements ClockInterface {
+//     currentTime: Date = new Date();
+//     setTime(d: Date) {
+//         this.currentTime = d;
+//     }
+//     constructor(h: number, m: number) {}
+// }
+
+
+// ***** Class Types1 *****
+// interface ClockInterface {
+//     currentTime: Date;
+// }
+//
+// class Clock implements ClockInterface {
+//     currentTime: Date = new Date();
+//     constructor(h: number, m: number) {}
+// }
+
+
+
+// ***** Indexable Types3 *****
 // interface NumberDictionary {
 //     [index: string]: number;
 //     length: number; // ok, length is a number
 //     name: string; // error, the type of 'name' is not a subtype of the indexer
+//     // TS2411: Property 'name' of type 'string' is not assignable to string index type 'number'.
 // }
 
+// interface NumberOrStringDictionary {
+//     [index: string]: number | string;
+//     length: number; // ok, length is a number
+//     name: string; // ok, name is a string
+// }
+
+// interface ReadonlyStringArray {
+//     readonly [index: number]: string;
+// }
+// let myArray: ReadonlyStringArray = ["Alice", "Bob"];
+// myArray[2] = "Mallory"; // error!
+// // TS2542: Index signature in type 'ReadonlyStringArray' only permits reading.
+
+
+
+// interface ReadonlyStringArray {
+//     readonly [index: number]: string;
+// }
+// let myArray: ReadonlyStringArray = ["Alice", "Bob"];
+// myArray[2] = "Mallory"; // error!
+
+
+
+
 // ***** Indexable Types2 *****
-class Animal {
-    name: string;
-}
-class Dog extends Animal {
-    breed: string;
-}
-
-// Error: indexing with a numeric string might get you a completely separate type of Animal!
-interface NotOkay {
-    [x: number]: Animal;
-    [x: string]: Dog;
-}
-
+// class Animal {
+//     name: string;
+// }
+// class Dog extends Animal {
+//     breed: number;
+// }
+//
+// // Error: indexing with a numeric string might get you a completely separate type of Animal!
+// interface NotOkay {
+//     [x: number]: Animal;
+//     [x: string]: Dog;
+// }
 
 // ***** Indexable Types *****
 // interface StringArray {
