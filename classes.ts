@@ -1,7 +1,7 @@
 // ***** Using a class as an interface *****
 class Point {
-    x: number;
-    y: number;
+    x: number | undefined;
+    y: number | undefined;
 }
 
 interface Point3d extends Point {
