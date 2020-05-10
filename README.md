@@ -1,5 +1,5 @@
 # Typescript
 
-https://www.typescriptlang.org/v2/docs/handbook/
+https://www.typescriptlang.org/docs/handbook/intro.html
 
 https://basarat.gitbook.io/typescript/
